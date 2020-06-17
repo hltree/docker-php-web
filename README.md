@@ -31,3 +31,5 @@ cp -RT ${from} ${to}
 ## Documentation
 
 ・[Use Apache](/apache/README.md)
+
+・[Use Nginx](/nginx/README.md)

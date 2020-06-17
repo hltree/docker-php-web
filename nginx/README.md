@@ -1,6 +1,6 @@
-# Apache
+# Nginx
 
-Using php with apache.
+Using php with nginx.
 
 ## Usage
 
