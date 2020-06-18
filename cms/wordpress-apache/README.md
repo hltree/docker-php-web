@@ -1,0 +1,62 @@
+# WordPress x Apache
+
+Using wordpress with apache.
+
+[template base](/apache)
+
+## Usage
+
+1. .envファイルをコピーする
+```
+コピー先で設定は自由に変えて頂いて構いません。
+$ cp .env-sample .env
+```
+
+2. dockerを起動する
+```
+起動
+$ docker-compose up -d
+（初回はビルドが入るため、時間がかかります）
+
+終了
+$ docker-compose down
+```
+
+## Settings
+
+### ・Portを変更する
+1. [docker-compose.yml](./docker-compose.yml)を開く
+2. 変更したいコンテナのportsを書き換える
+3. （docker動作中なら）コンテナを再起動する
+
+### ・PHP My Adminのインポートサイズを変更する
+1. [upload.ini](./docker/phpmyadmin/upload.ini)を開く
+2. 設定値を変更する
+```
+例
+
+upload_max_filesize=128M
+```
+
+### GDの設定値を変更する
+PHP 7.4以降はGDのパラメータが異なるようなので注意。
+
+1. PHPの[Dockerfile](./docker/php/Dockerfile)を開く
+
+2. ` docker-php-ext-configure `を修正する
+```
+# Exsample: (PHP 7.4)
+
+# 7.4以降は末尾のdirがない
+docker-php-ext-configure --with-freetype=/usr/include/
+```
+
+## Available by default
+
+・PHP
+
+・MySQL
+
+・PHP My Admin
+
+・WordPress
