@@ -64,18 +64,17 @@ laravelの初期画面が表示されることを確認する
 upload_max_filesize=128M
 ```
 
-### GDの設定値を変更する
-PHP 7.4以降はGDのパラメータが異なるようなので注意。
+
+### PHP7.4以降の設定について
+PHP 7.4以降は下記を行う必要がある。（7.3は未検証）
 
 1. PHPの[Dockerfile](./docker/php/Dockerfile)を開く
 
-2. ` docker-php-ext-configure `を修正する
-```
-# Exsample: (PHP 7.4)
+2. 下記を修正する
 
-# 7.4以降は末尾のdirがない
-docker-php-ext-configure --with-freetype=/usr/include/
-```
+`zlib1g-dev` を `libzip-dev` に変更。
+
+`mbstring` を削除し、 `libonig-dev` をapt-getに追加。
 
 ### PHP 7.3以降でzlib1g-devのインストールが失敗する
 
