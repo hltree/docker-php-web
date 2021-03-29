@@ -8,9 +8,8 @@ services:
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./data:/var/www/html
-    links:
-      - phpmyadmin
-      - mysql
+    networks:
+      - app
   nginx:
     container_name: nginx
     image: nginx
@@ -50,10 +49,12 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=${PHP_MY_ADMIN_USER}
       - PMA_PASSWORD=${PHP_MY_ADMIN_PASSWORD}
-    links:
-      - mysql
+    networks:
+      - app
     ports:
       - 8080:80
     volumes:
       - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/php.ini
       - ./docker/phpmyadmin/sessions:/sessions
+networks:
+  app:

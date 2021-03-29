@@ -11,9 +11,8 @@ services:
       - ./data:/var/www/html
     ports:
       - 80:80
-    links:
-      - phpmyadmin
-      - mysql
+    networks:
+      - app
   mysql:
     container_name: mysql
     image: mysql:5.7
@@ -43,10 +42,12 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=${PHP_MY_ADMIN_USER}
       - PMA_PASSWORD=${PHP_MY_ADMIN_PASSWORD}
-    links:
-      - mysql
+    networks:
+      - app
     ports:
       - 8080:80
     volumes:
       - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/php.ini
       - ./docker/phpmyadmin/sessions:/sessions
+networks:
+  app:
