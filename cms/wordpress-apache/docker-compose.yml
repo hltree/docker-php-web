@@ -62,7 +62,7 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/php.ini
+      - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
       - ./docker/phpmyadmin/sessions:/sessions
 networks:
   app:
