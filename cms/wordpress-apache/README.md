@@ -38,19 +38,6 @@ $ docker-compose down
 upload_max_filesize=128M
 ```
 
-
-### PHP7.4以降の設定について
-PHP 7.4以降は下記を行う必要がある。（7.3は未検証）
-
-1. PHPの[Dockerfile](./docker/php/Dockerfile)を開く
-
-2. 下記を修正する
-
-`zlib1g-dev` を `libzip-dev` に変更。
-
-`mbstring` を削除し、 `libonig-dev` をapt-getに追加。
-
-
 ## Available by default
 
 ・PHP
