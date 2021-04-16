@@ -4,13 +4,14 @@ DockerでPHP環境を作成するサンプル集です。
 
 構築の際の参考にしてください。
 
-## Requirements
+## PHP Version
 
-・Docker(19.03.8)
+- 7.4
 
 ## Environment
 
-・Mac OS Mojave 10.14.6（確認済）
+- Mac OS Mojave 10.14.6（確認済） 
+- Docker(19.03.8)
 
 ## Usage
 
