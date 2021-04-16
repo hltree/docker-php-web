@@ -6,7 +6,7 @@ DockerでPHP環境を作成するサンプル集です。
 
 ## PHP Version
 
-- 7.4
+- 7.2
 
 ## Environment
 

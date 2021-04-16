@@ -3,13 +3,13 @@ version: '3'
 services:
   php:
     container_name: php
-    image: php:7.3-fpm
+    image: php:7.2-fpm
     build: ./docker/php
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
       - ./data:/var/www/html
-    networks:
-      - app
+    links:
+      - mysql
   nginx:
     container_name: nginx
     image: nginx
@@ -49,12 +49,10 @@ services:
       - PMA_HOST=mysql
       - PMA_USER=${PHP_MY_ADMIN_USER}
       - PMA_PASSWORD=${PHP_MY_ADMIN_PASSWORD}
-    networks:
-      - app
     ports:
       - 8080:80
     volumes:
       - ./docker/phpmyadmin/upload.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
       - ./docker/phpmyadmin/sessions:/sessions
-networks:
-  app:
+    links:
+      - mysql
