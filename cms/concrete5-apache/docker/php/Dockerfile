@@ -1,4 +1,6 @@
 FROM php:7.4-apache
+COPY ./php.ini /usr/local/etc/php/
+COPY ./*.conf /etc/apache2/sites-enabled/
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -22,3 +24,10 @@ RUN apt-get update && apt-get install -y \
         mysqli \
         zip \
     && a2enmod rewrite
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
+RUN composer global require "laravel/installer"
