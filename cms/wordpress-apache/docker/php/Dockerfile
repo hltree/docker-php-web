@@ -1,3 +1,33 @@
-FROM php:7.2-apache
+FROM php:7.4-apache
+COPY ./php.ini /usr/local/etc/php/
+COPY ./*.conf /etc/apache2/sites-enabled/
 
-RUN docker-php-ext-install pdo_mysql mysqli mbstring && docker-php-ext-enable pdo_mysql mysqli mbstring && a2enmod rewrite
+RUN apt-get update && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
+        libpng-dev \
+        zlib1g-dev \
+        libxml2-dev \
+        libzip-dev \
+        libonig-dev \
+        graphviz \
+        unzip \
+    && docker-php-ext-configure \
+        gd \
+        --with-freetype-dir=/usr/include/ \
+        --with-jpeg-dir=/usr/include/ \
+        --with-png-dir=/usr/include/ \
+    && docker-php-ext-install \
+        gd \
+        pdo_mysql \
+        mysqli \
+        zip \
+    && a2enmod rewrite
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
+RUN composer global require "laravel/installer"
