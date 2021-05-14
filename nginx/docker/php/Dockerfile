@@ -1,7 +1,5 @@
-FROM php:7.4-fpm
-
-COPY php.ini /usr/local/etc/php/
-
+FROM php:7.4-apache
+COPY ./php.ini /usr/local/etc/php/
 
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -13,8 +11,21 @@ RUN apt-get update && apt-get install -y \
         libzip-dev \
         libonig-dev \
         graphviz \
+        unzip \
+    && docker-php-ext-configure \
+        gd \
+        --with-freetype \
+        --with-jpeg \
     && docker-php-ext-install \
         gd \
         pdo_mysql \
         mysqli \
         zip \
+    && a2enmod rewrite
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
+
+RUN composer global require "laravel/installer"

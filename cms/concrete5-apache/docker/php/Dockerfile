@@ -15,9 +15,8 @@ RUN apt-get update && apt-get install -y \
         unzip \
     && docker-php-ext-configure \
         gd \
-        --with-freetype-dir=/usr/include/ \
-        --with-jpeg-dir=/usr/include/ \
-        --with-png-dir=/usr/include/ \
+        --with-freetype \
+        --with-jpeg \
     && docker-php-ext-install \
         gd \
         pdo_mysql \
