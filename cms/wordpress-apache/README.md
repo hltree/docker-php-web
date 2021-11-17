@@ -47,3 +47,5 @@ upload_max_filesize=128M
 ・PHP My Admin
 
 ・WordPress
+
+・MailHog

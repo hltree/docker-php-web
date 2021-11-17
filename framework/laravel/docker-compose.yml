@@ -49,5 +49,12 @@ services:
       - ./docker/phpmyadmin/sessions:/sessions
     networks:
       - app
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
+    networks:
+      - app
 networks:
   app:

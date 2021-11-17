@@ -79,3 +79,5 @@ upload_max_filesize=128M
 ・MySQL
 
 ・PHP My Admin
+
+・MailHog

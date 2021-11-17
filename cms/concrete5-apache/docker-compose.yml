@@ -12,6 +12,7 @@ services:
     ports:
       - 80:80
     links:
+      - mailhog
       - mysql
   mysql:
     container_name: mysql
@@ -49,3 +50,8 @@ services:
       - ./docker/phpmyadmin/sessions:/sessions
     links:
       - mysql
+  mailhog:
+    container_name: mailhog
+    image: mailhog/mailhog
+    ports:
+      - 8025:8025
