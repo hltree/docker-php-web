@@ -10,8 +10,8 @@ DockerでPHP環境を作成するサンプル集です。
 
 ## Environment
 
-- Mac OS Mojave 10.14.6（確認済） 
-- Docker(19.03.8)
+- Mac OS Big Sur 11.5.2（確認済） 
+- Docker version 20.10.8, build 3967b7d
 
 ## Usage
 
