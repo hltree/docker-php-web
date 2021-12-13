@@ -1,26 +1,21 @@
 FROM php:7.4-apache
 
 RUN apt-get update && apt-get install -y \
-        libfreetype6-dev \
-        libjpeg62-turbo-dev \
-        libmcrypt-dev \
-        libpng-dev \
-        zlib1g-dev \
-        libxml2-dev \
         libzip-dev \
         libonig-dev \
-        graphviz \
+        libpq-dev \
+        unzip \
+        cron \
+        zlib1g-dev \
+        libpng-dev \
     && docker-php-ext-install \
-        iconv \
-        mcrypt \
         gd \
         pdo_mysql \
         mysqli \
         zip \
-    && docker-php-ext-configure \
-        gd \
-        --enable-gd-native-ttf \
-        --with-freetype \
-        --with-jpeg \
-    && docker-php-ext-install gd pdo_mysql mysqli \
     && a2enmod rewrite
+
+COPY --from=composer /usr/bin/composer /usr/bin/composer
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /composer
+ENV PATH $PATH:/composer/vendor/bin
