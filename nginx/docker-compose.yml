@@ -14,7 +14,7 @@ services:
     container_name: nginx
     image: nginx
     ports:
-      - ${PHP_PORT:-80:80}
+      - ${PHP_WEB_PORT:-80:80}
     volumes:
       - ./docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
       - ./data:/var/www/html
