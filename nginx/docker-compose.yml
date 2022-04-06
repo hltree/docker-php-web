@@ -46,7 +46,7 @@ services:
       - .env
     environment:
       - PMA_ARBITARY=1
-      - PMA_HOST=mysql
+      - PMA_HOST=${CONTAINER_NAME_PREFIX:-}mysql
       - PMA_USER=${DB_USER:-user}
       - PMA_PASSWORD=${DB_PASSWORD:-password}
     ports:
