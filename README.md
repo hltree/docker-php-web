@@ -6,12 +6,7 @@ DockerでPHP環境を作成するサンプル集です。
 
 ## PHP Version
 
-- 7.4
-
-## Environment
-
-- Mac OS Big Sur 11.5.2（確認済） 
-- Docker version 20.10.8, build 3967b7d
+- 5.6
 
 ## Usage
 

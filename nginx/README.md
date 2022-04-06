@@ -1,3 +1,5 @@
+# こちらは未対応です（バージョン7.4です）
+
 # Nginx
 
 Using php with nginx.

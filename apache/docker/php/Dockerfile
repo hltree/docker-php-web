@@ -1,21 +1,14 @@
-FROM php:7.4-apache
+FROM php:5.6-apache
 
-RUN apt-get update && apt-get install -y \
-        libzip-dev \
-        libonig-dev \
-        libpq-dev \
-        unzip \
-        cron \
-        zlib1g-dev \
+RUN apt-get update \
+    && apt-get install -y \
+        libfreetype6-dev \
+        libjpeg62-turbo-dev \
+        libmcrypt-dev \
         libpng-dev \
-    && docker-php-ext-install \
-        gd \
-        pdo_mysql \
-        mysqli \
-        zip \
+        openssl libssl-dev \
+        libxml2-dev \
+    && docker-php-ext-install -j$(nproc) iconv mcrypt pdo_mysql mbstring xml tokenizer zip \
+    && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd \
     && a2enmod rewrite
-
-COPY --from=composer /usr/bin/composer /usr/bin/composer
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /composer
-ENV PATH $PATH:/composer/vendor/bin
