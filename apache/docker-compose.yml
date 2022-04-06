@@ -2,7 +2,7 @@ version: '3'
 
 services:
   php:
-    container_name: php
+    container_name: ${CONTAINER_NAME_PREFIX:-}php
     image: php:7.4-apache
     build: ./docker/php
     volumes:
@@ -14,7 +14,7 @@ services:
     networks:
       - app
   mysql:
-    container_name: mysql
+    container_name: ${CONTAINER_NAME_PREFIX:-}mysql
     image: mysql:5.7
     ports:
       - ${DB_PORT:-3306:3306}
@@ -33,7 +33,7 @@ services:
     networks:
       - app
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: ${CONTAINER_NAME_PREFIX:-}phpmyadmin
     image: phpmyadmin/phpmyadmin
     environment:
       - PMA_ARBITARY=1
@@ -48,7 +48,7 @@ services:
     networks:
       - app
   mailhog:
-    container_name: mailhog
+    container_name: ${CONTAINER_NAME_PREFIX:-}mailhog
     image: mailhog/mailhog
     ports:
       - ${MAILHOG_PORT:-8025:8025}
