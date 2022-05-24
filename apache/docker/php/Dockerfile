@@ -1,6 +1,8 @@
-FROM php:7.4-apache
+FROM php:8.0-apache
 
 RUN apt-get update && apt-get install -y \
+  	libfreetype6-dev \
+        libjpeg62-turbo-dev \
         libzip-dev \
         libonig-dev \
         libpq-dev \
@@ -8,6 +10,9 @@ RUN apt-get update && apt-get install -y \
         cron \
         zlib1g-dev \
         libpng-dev \
+        libjpeg-dev \
+        libwebp-dev \
+    && docker-php-ext-configure gd -with-jpeg=/usr/include/ --with-freetype=/usr/include/ \
     && docker-php-ext-install \
         gd \
         pdo_mysql \

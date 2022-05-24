@@ -3,7 +3,7 @@ version: '3'
 services:
   php:
     container_name: ${CONTAINER_NAME_PREFIX:-}php
-    image: php:7.4-fpm
+    image: php:8.0-fpm
     build: ./docker/php
     volumes:
       - ./docker/php/php.ini:/usr/local/etc/php/php.ini
